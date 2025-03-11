@@ -21,4 +21,30 @@ DevOps Basic to Advance Topics
   OpenShift: Containerisation and orchestration
 
 
+# Topic 1: Introduction to DevOps ( Core Concepts)
+ ## Basic
+   ## Module 1: Introduction to DevOps
+     Introduction to Software Development and DevOps
+     DevOps LifeCycle and Tools
+     Introduction to DevOps on Cloud
+     Linux Fundamentals for DevOps
+     DevOps Methodologies
+   ## Module 2: Introduction to Advanced DevOps Practices
+     Evolution of DevOps: From CI/CD to GitOps
+       History and key milestones
+       CI/CD Practices to emergence of GitOps
+       Impact of DevOps on SDLC and Operation
+       Importance of DevOps Practices
+       Benefits and Challenges of DevOps and GitOps
+## Case Studies:
+  Examples of organizations (e.g., Netflix, Spotify) leveraging GitOps for operational excellence.
+   ## Module 3: Understanding Infrastructure as Code (IaC)
+     Definition and Importance of IaC
+       Principles of IaC
+       Benefits of IaC
+     Common tools and Frameworks (Terraform, Powershell DSC, CloudFormation)
+       Overview and comparison of Terraform and other tools
+       Practical demonstrations of using terraform to provision infrastructure
+
+
 
