@@ -1819,7 +1819,658 @@ These assignments will help you practice and understand text processing and edit
 
 
 ## 7. **Processes and Job Management**
-## 8. **Networking basics**
+Sure! Let's explore processes and job management in Linux, starting from basic to advanced levels. We'll cover various commands and tools, along with detailed explanations and examples.
+
+### Basic Concepts
+
+#### Processes
+A process is an instance of a running program. Each process has a unique Process ID (PID).
+
+#### Jobs
+A job is a process that is started by the shell. Jobs can be run in the foreground or background.
+
+### Basic Commands
+
+#### 1. **`ps` (Process Status)**
+Displays information about active processes.
+- **Command**:
+  ```bash
+  ps
+  ```
+- **Example**:
+  ```bash
+  ps aux
+  ```
+  *Explanation*: This command displays detailed information about all running processes.
+
+#### 2. **`top`**
+Displays real-time system summary and process information.
+- **Command**:
+  ```bash
+  top
+  ```
+- **Example**:
+  ```bash
+  top
+  ```
+  *Explanation*: This command shows real-time system processes and resource usage.
+
+#### 3. **`htop`**
+An interactive process viewer (similar to `top` but more user-friendly).
+- **Command**:
+  ```bash
+  htop
+  ```
+- **Example**:
+  ```bash
+  htop
+  ```
+  *Explanation*: This command provides an interactive interface for monitoring system processes.
+
+#### 4. **`kill`**
+Sends a signal to a process, typically to terminate it.
+- **Command**:
+  ```bash
+  kill PID
+  ```
+- **Example**:
+  ```bash
+  kill 1234
+  ```
+  *Explanation*: This command sends the default signal (SIGTERM) to terminate the process with PID 1234.
+
+#### 5. **`killall`**
+Kills all processes with a specified name.
+- **Command**:
+  ```bash
+  killall process_name
+  ```
+- **Example**:
+  ```bash
+  killall firefox
+  ```
+  *Explanation*: This command terminates all instances of the `firefox` process.
+
+#### 6. **`pkill`**
+Sends a signal to processes based on name and other attributes.
+- **Command**:
+  ```bash
+  pkill process_name
+  ```
+- **Example**:
+  ```bash
+  pkill -f "python script.py"
+  ```
+  *Explanation*: This command sends the default signal to terminate the process running `python script.py`.
+
+### Intermediate Commands
+
+#### 7. **`bg` (Background)**
+Resumes a suspended job in the background.
+- **Command**:
+  ```bash
+  bg job_id
+  ```
+- **Example**:
+  ```bash
+  bg %1
+  ```
+  *Explanation*: This command resumes job number 1 in the background.
+
+#### 8. **`fg` (Foreground)**
+Brings a background job to the foreground.
+- **Command**:
+  ```bash
+  fg job_id
+  ```
+- **Example**:
+  ```bash
+  fg %1
+  ```
+  *Explanation*: This command brings job number 1 to the foreground.
+
+#### 9. **`jobs`**
+Lists all jobs running in the current shell session.
+- **Command**:
+  ```bash
+  jobs
+  ```
+- **Example**:
+  ```bash
+  jobs
+  ```
+  *Explanation*: This command lists all background and suspended jobs.
+
+#### 10. **`nohup`**
+Runs a command immune to hangups, with output to a non-tty.
+- **Command**:
+  ```bash
+  nohup command &
+  ```
+- **Example**:
+  ```bash
+  nohup ./script.sh &
+  ```
+  *Explanation*: This command runs `script.sh` in the background, immune to hangups.
+
+### Advanced Commands
+
+#### 11. **`nice`**
+Runs a command with a modified scheduling priority.
+- **Command**:
+  ```bash
+  nice -n priority command
+  ```
+- **Example**:
+  ```bash
+  nice -n 10 ./script.sh
+  ```
+  *Explanation*: This command runs `script.sh` with a lower priority (10).
+
+#### 12. **`renice`**
+Changes the priority of an already running process.
+- **Command**:
+  ```bash
+  renice priority -p PID
+  ```
+- **Example**:
+  ```bash
+  renice 5 -p 1234
+  ```
+  *Explanation*: This command changes the priority of the process with PID 1234 to 5.
+
+#### 13. **`at`**
+Schedules a command to run at a specified time.
+- **Command**:
+  ```bash
+  echo "command" | at time
+  ```
+- **Example**:
+  ```bash
+  echo "./script.sh" | at now + 1 hour
+  ```
+  *Explanation*: This command schedules `script.sh` to run one hour from now.
+
+#### 14. **`cron`**
+Schedules recurring tasks using `crontab`.
+- **Command**:
+  ```bash
+  crontab -e
+  ```
+- **Example**:
+  ```bash
+  0 2 * * * /home/user/backup.sh
+  ```
+  *Explanation*: This cron job runs `backup.sh` at 2 AM every day.
+
+### Examples and Use Cases
+
+#### Example 1: Viewing Active Processes
+- **Command**:
+  ```bash
+  ps aux
+  ```
+  *Explanation*: Displays detailed information about all running processes.
+
+#### Example 2: Monitoring System Processes in Real-Time
+- **Command**:
+  ```bash
+  top
+  ```
+  *Explanation*: Shows real-time system processes and resource usage.
+
+#### Example 3: Terminating a Process
+- **Command**:
+  ```bash
+  kill 1234
+  ```
+  *Explanation*: Sends the default signal (SIGTERM) to terminate the process with PID 1234.
+
+#### Example 4: Running a Command in the Background
+- **Command**:
+  ```bash
+  nohup ./script.sh &
+  ```
+  *Explanation*: Runs `script.sh` in the background, immune to hangups.
+
+#### Example 5: Changing Process Priority
+- **Command**:
+  ```bash
+  renice 5 -p 1234
+  ```
+  *Explanation*: Changes the priority of the process with PID 1234 to 5.
+
+#### Example 6: Scheduling a Command to Run Later
+- **Command**:
+  ```bash
+  echo "./script.sh" | at now + 1 hour
+  ```
+  *Explanation*: Schedules `script.sh` to run one hour from now.
+
+#### Example 7: Scheduling Recurring Tasks with `cron`
+- **Command**:
+  ```bash
+  crontab -e
+  ```
+  Add the following line:
+  ```bash
+  0 2 * * * /home/user/backup.sh
+  ```
+  *Explanation*: This cron job runs `backup.sh` at 2 AM every day.
+
+These commands and tools provide powerful capabilities for managing processes and jobs in Linux, from basic to advanced levels.
+
+### Assignments:
+Sure! Here are some practical assignment questions to help you practice processes and job management in Linux, from basic to advanced levels:
+
+### Basic Level Assignments
+
+1. **Display information about all running processes using the `ps` command.**
+   - Command:
+     ```bash
+     ps aux
+     ```
+
+2. **Monitor system processes and resource usage in real-time using the `top` command.**
+   - Command:
+     ```bash
+     top
+     ```
+
+3. **Terminate a process with PID 1234 using the `kill` command.**
+   - Command:
+     ```bash
+     kill 1234
+     ```
+
+4. **Terminate all instances of the `firefox` process using the `killall` command.**
+   - Command:
+     ```bash
+     killall firefox
+     ```
+
+5. **Send a signal to terminate the process running `python script.py` using the `pkill` command.**
+   - Command:
+     ```bash
+     pkill -f "python script.py"
+     ```
+
+### Intermediate Level Assignments
+
+6. **List all jobs running in the current shell session using the `jobs` command.**
+   - Command:
+     ```bash
+     jobs
+     ```
+
+7. **Resume a suspended job with job ID 1 in the background using the `bg` command.**
+   - Command:
+     ```bash
+     bg %1
+     ```
+
+8. **Bring a background job with job ID 1 to the foreground using the `fg` command.**
+   - Command:
+     ```bash
+     fg %1
+     ```
+
+9. **Run a script named `script.sh` in the background, immune to hangups, using the `nohup` command.**
+   - Command:
+     ```bash
+     nohup ./script.sh &
+     ```
+
+10. **Change the priority of a process with PID 1234 to 5 using the `renice` command.**
+    - Command:
+      ```bash
+      renice 5 -p 1234
+      ```
+
+### Advanced Level Assignments
+
+11. **Run a script named `script.sh` with a lower priority (10) using the `nice` command.**
+    - Command:
+      ```bash
+      nice -n 10 ./script.sh
+      ```
+
+12. **Schedule a script named `backup.sh` to run one hour from now using the `at` command.**
+    - Command:
+      ```bash
+      echo "./backup.sh" | at now + 1 hour
+      ```
+
+13. **Create a cron job to run a script named `backup.sh` at 2 AM every day using `crontab`.**
+    - Command:
+      ```bash
+      crontab -e
+      ```
+    - Add the following line:
+      ```bash
+      0 2 * * * /home/user/backup.sh
+      ```
+
+14. **Monitor system processes interactively using the `htop` command.**
+    - Command:
+      ```bash
+      htop
+      ```
+
+15. **Create a script that lists all running processes, filters for processes owned by the user `john`, and terminates them.**
+    - Script:
+      ```bash
+      #!/bin/bash
+      ps -u john -o pid= | xargs kill
+      ```
+
+### Additional Tasks
+
+16. **Create a script that runs a command in the background and logs its output to a file named `output.log`.**
+    - Script:
+      ```bash
+      #!/bin/bash
+      nohup ./command.sh > output.log 2>&1 &
+      ```
+
+17. **Use `cron` to schedule a recurring task that runs a script named `cleanup.sh` every Sunday at midnight.**
+    - Command:
+      ```bash
+      crontab -e
+      ```
+    - Add the following line:
+      ```bash
+      0 0 * * 0 /home/user/cleanup.sh
+      ```
+
+18. **Create a script that changes the priority of all processes owned by the user `alice` to 10.**
+    - Script:
+      ```bash
+      #!/bin/bash
+      ps -u alice -o pid= | xargs renice 10 -p
+      ```
+
+These assignments will help you practice and understand processes and job management in Linux, from basic to advanced levels.
+
+## 8. **Networking**
+Sure! Let's explore networking in Linux, starting from basic to advanced levels. We'll cover various commands and tools, along with detailed explanations and examples. Finally, I'll provide some assignment questions to help you practice.
+
+### Basic Networking Commands
+
+#### 1. **`ip`**
+The `ip` command is used to show and manipulate routing, devices, policy routing, and tunnels.
+
+- **View IP Addresses**:
+  ```bash
+  ip addr show
+  ```
+  *Example*: Displays all network interfaces and their IP addresses.
+
+- **Add an IP Address**:
+  ```bash
+  sudo ip addr add 192.168.1.100/24 dev eth0
+  ```
+  *Example*: Adds the IP address `192.168.1.100` to the `eth0` interface.
+
+- **Delete an IP Address**:
+  ```bash
+  sudo ip addr del 192.168.1.100/24 dev eth0
+  ```
+  *Example*: Deletes the IP address `192.168.1.100` from the `eth0` interface.
+
+#### 2. **`ping`**
+The `ping` command checks the connectivity between the host and a server.
+
+- **Ping a Host**:
+  ```bash
+  ping google.com
+  ```
+  *Example*: Sends ICMP echo requests to `google.com`.
+
+#### 3. **`traceroute`**
+The `traceroute` command shows the route packets take to reach a network host.
+
+- **Trace Route to a Host**:
+  ```bash
+  traceroute google.com
+  ```
+  *Example*: Displays the path packets take to reach `google.com`.
+
+#### 4. **`netstat`**
+The `netstat` command displays network connections, routing tables, interface statistics, masquerade connections, and multicast memberships.
+
+- **View Network Connections**:
+  ```bash
+  netstat -tuln
+  ```
+  *Example*: Displays all listening ports and their status.
+
+#### 5. **`ifconfig`**
+The `ifconfig` command is used to configure network interfaces.
+
+- **View Network Interfaces**:
+  ```bash
+  ifconfig
+  ```
+  *Example*: Displays all network interfaces and their configuration.
+
+- **Bring Up an Interface**:
+  ```bash
+  sudo ifconfig eth0 up
+  ```
+  *Example*: Activates the `eth0` network interface.
+
+- **Bring Down an Interface**:
+  ```bash
+  sudo ifconfig eth0 down
+  ```
+  *Example*: Deactivates the `eth0` network interface.
+
+### Intermediate Networking Commands
+
+#### 6. **`ss`**
+The `ss` command is used to dump socket statistics.
+
+- **View Socket Statistics**:
+  ```bash
+  ss -tuln
+  ```
+  *Example*: Displays all listening sockets.
+
+#### 7. **`dig`**
+The `dig` command queries DNS servers.
+
+- **Query DNS Records**:
+  ```bash
+  dig google.com
+  ```
+  *Example*: Retrieves DNS information for `google.com`.
+
+#### 8. **`curl`**
+The `curl` command transfers data from or to a server using various protocols.
+
+- **Download a File**:
+  ```bash
+  curl -O http://example.com/file.txt
+  ```
+  *Example*: Downloads `file.txt` from `example.com`.
+
+#### 9. **`wget`**
+The `wget` command retrieves files from the web.
+
+- **Download a File**:
+  ```bash
+  wget http://example.com/file.txt
+  ```
+  *Example*: Downloads `file.txt` from `example.com`.
+
+#### 10. **`nmap`**
+The `nmap` command is used for network discovery and security auditing.
+
+- **Scan a Host**:
+  ```bash
+  nmap google.com
+  ```
+  *Example*: Performs a basic scan on `google.com`.
+
+### Advanced Networking Commands
+
+#### 11. **`tcpdump`**
+The `tcpdump` command captures and analyzes network packets.
+
+- **Capture Packets**:
+  ```bash
+  sudo tcpdump -i eth0
+  ```
+  *Example*: Captures packets on the `eth0` interface.
+
+#### 12. **`iperf`**
+The `iperf` command measures network performance.
+
+- **Measure Network Performance**:
+  ```bash
+  iperf -c server_ip
+  ```
+  *Example*: Measures network performance between the local machine and `server_ip`.
+
+#### 13. **`ethtool`**
+The `ethtool` command is used to query and control network driver and hardware settings.
+
+- **View Ethernet Device Settings**:
+  ```bash
+  sudo ethtool eth0
+  ```
+  *Example*: Displays settings for the `eth0` interface.
+
+#### 14. **`firewalld`**
+The `firewalld` command manages firewall rules.
+
+- **Add a Firewall Rule**:
+  ```bash
+  sudo firewall-cmd --add-port=80/tcp --permanent
+  ```
+  *Example*: Opens port 80 for TCP traffic.
+
+- **Reload Firewall Rules**:
+  ```bash
+  sudo firewall-cmd --reload
+  ```
+  *Example*: Reloads the firewall rules.
+
+#### 15. **`nmcli`**
+The `nmcli` command is used to manage NetworkManager.
+
+- **View Network Connections**:
+  ```bash
+  nmcli connection show
+  ```
+  *Example*: Displays all network connections managed by NetworkManager.
+
+### Examples and Use Cases
+
+#### Example 1: Checking Connectivity
+- **Command**:
+  ```bash
+  ping google.com
+  ```
+  *Explanation*: Sends ICMP echo requests to `google.com` to check connectivity.
+
+#### Example 2: Tracing Route to a Host
+- **Command**:
+  ```bash
+  traceroute google.com
+  ```
+  *Explanation*: Displays the path packets take to reach `google.com`.
+
+#### Example 3: Viewing Network Connections
+- **Command**:
+  ```bash
+  netstat -tuln
+  ```
+  *Explanation*: Displays all listening ports and their status.
+
+#### Example 4: Querying DNS Records
+- **Command**:
+  ```bash
+  dig google.com
+  ```
+  *Explanation*: Retrieves DNS information for `google.com`.
+
+#### Example 5: Capturing Network Packets
+- **Command**:
+  ```bash
+  sudo tcpdump -i eth0
+  ```
+  *Explanation*: Captures packets on the `eth0` interface.
+
+### Assignment Questions
+
+#### Basic Level Assignments
+1. **Display all network interfaces and their IP addresses using the `ip` command.**
+   - Command:
+     ```bash
+     ip addr show
+     ```
+
+2. **Ping a host named `example.com` and check connectivity.**
+   - Command:
+     ```bash
+     ping example.com
+     ```
+
+3. **Bring up the `eth0` network interface using the `ifconfig` command.**
+   - Command:
+     ```bash
+     sudo ifconfig eth0 up
+     ```
+
+#### Intermediate Level Assignments
+4. **Query DNS records for `example.com` using the `dig` command.**
+   - Command:
+     ```bash
+     dig example.com
+     ```
+
+5. **Download a file named `sample.txt` from `example.com` using the `wget` command.**
+   - Command:
+     ```bash
+     wget http://example.com/sample.txt
+     ```
+
+6. **Scan a host named `example.com` using the `nmap` command.**
+   - Command:
+     ```bash
+     nmap example.com
+     ```
+
+#### Advanced Level Assignments
+7. **Capture network packets on the `eth0` interface using the `tcpdump` command.**
+   - Command:
+     ```bash
+     sudo tcpdump -i eth0
+     ```
+
+8. **Measure network performance between your machine and a server with IP `192.168.1.1` using the `iperf` command.**
+   - Command:
+     ```bash
+     iperf -c 192.168.1.1
+     ```
+
+9. **Add a firewall rule to open port 443 for TCP traffic using the `firewalld` command.**
+   - Command:
+     ```bash
+     sudo firewall-cmd --add-port=443/tcp --permanent
+     sudo firewall-cmd --reload
+     ```
+
+10. **View all network connections managed by NetworkManager using the `nmcli` command.**
+    - Command:
+      ```bash
+      nmcli connection show
+      ```
+
+These assignments will help you practice and understand networking in Linux, from basic to advanced levels. 
+
 ## 9. **Disk and Storage Management**
 10. **System Monitoring and Performance**
 11. **Shell Scripting**
@@ -1829,6 +2480,7 @@ These assignments will help you practice and understand text processing and edit
 15. **Services Management and Systemd**
 16. **SELinux commands**
 17. **Kernel Management**
+18. **Errors Management and Troubleshoot**
 
 
 
