@@ -15,12 +15,12 @@
  ### What is the use of linux in DevOps ?
   Linux plays a crucial role in DevOps for several reasons:
 
-1. **Server Management**: Many servers run on Linux due to its stability and performance. DevOps engineers use Linux to manage these servers, ensuring they are configured correctly and running smoothly[1](https://www.tutorialworks.com/linux-for-devops/).
-2. **Automation**: Linux supports powerful scripting languages like Bash, which are used to automate repetitive tasks, such as deployments, backups, and monitoring[1](https://www.tutorialworks.com/linux-for-devops/).
-3. **Containerization**: Tools like Docker and Kubernetes, which are essential for containerization and orchestration in DevOps, are built to run on Linux[2](https://dev.to/devopsdynamicshub/linux-for-devops-engineer-101-3378).
-4. **Configuration Management**: Tools like Ansible, Puppet, and Chef are often used in DevOps for configuration management and are designed to work seamlessly with Linux[2](https://dev.to/devopsdynamicshub/linux-for-devops-engineer-101-3378).
-5. **Security**: Linux's robust security features make it ideal for maintaining secure environments, which is critical in DevOps[2](https://dev.to/devopsdynamicshub/linux-for-devops-engineer-101-3378).
-6. **Continuous Integration/Continuous Deployment (CI/CD)**: Linux environments are commonly used for setting up CI/CD pipelines, enabling automated testing and deployment of applications[1](https://www.tutorialworks.com/linux-for-devops/).
+1. **Server Management**: Many servers run on Linux due to its stability and performance. DevOps engineers use Linux to manage these servers, ensuring they are configured correctly and running smoothly.
+2. **Automation**: Linux supports powerful scripting languages like Bash, which are used to automate repetitive tasks, such as deployments, backups, and monitoring.
+3. **Containerization**: Tools like Docker and Kubernetes, which are essential for containerization and orchestration in DevOps, are built to run on Linux.
+4. **Configuration Management**: Tools like Ansible, Puppet, and Chef are often used in DevOps for configuration management and are designed to work seamlessly with Linux.
+5. **Security**: Linux's robust security features make it ideal for maintaining secure environments, which is critical in DevOps.
+6. **Continuous Integration/Continuous Deployment (CI/CD)**: Linux environments are commonly used for setting up CI/CD pipelines, enabling automated testing and deployment of applications.
 
 ### What are popular DevOps tools for Linux?
 There are many popular DevOps tools for Linux, each serving different aspects of the DevOps lifecycle. Here are some of the most widely used ones:
@@ -36,7 +36,7 @@ There are many popular DevOps tools for Linux, each serving different aspects of
 9. **Nagios**: A monitoring system that enables organizations to identify and resolve IT infrastructure problems.
 10. **ELK Stack (Elasticsearch, Logstash, Kibana)**: A set of tools for searching, analyzing, and visualizing log data in real-time.
 
-These tools help streamline various DevOps processes, from code management and integration to deployment, monitoring, and infrastructure management[1](https://www.simplilearn.com/tutorials/devops-tutorial/devops-tools)[2](https://sourceforge.net/software/devops/linux/)[3](https://www.cloudzero.com/blog/devops-tools/).
+These tools help streamline various DevOps processes, from code management and integration to deployment, monitoring, and infrastructure management.
 
 ### Basics of Linux commands:
 1. **Linux File System**
@@ -238,10 +238,10 @@ nano file.txt
 These commands are fundamental for navigating and managing the Linux file system. They help perform a wide range of tasks, from file manipulation to system monitoring.
 
 ### Assignments / Practicals:
-**Navigate to the FileSystem and list out the contents and files using above learnt commands**
-**Create a new directory called assignment-dir, navigate into it, and create an empty file named file-practice.txt, then add the content / information in that file.**
-**Create a new directories called assignment1, assignment2. Create a file1.txt and Add content into it "This is text file", then copy this file to assignment2 directory. Then move the assignment2 directory to the assignment1 directory**
-**Check the usage of Disk Space and the individual directories under /.**
+1. **Navigate to the FileSystem and list out the contents and files using above learnt commands.**
+2. **Create a new directory called assignment-dir, navigate into it, and create an empty file named file-practice.txt, then add the content / information in that file.**
+3. **Create a new directories called assignment1, assignment2. Create a file1.txt and Add content into it "This is text file", then copy this file to assignment2 directory. Then move the assignment2 directory to the assignment1 directory.**
+4. **Check the usage of Disk Space and the individual directories under root(/).**
 
 
 ## Permissions and Ownership :
