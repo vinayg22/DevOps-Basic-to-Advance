@@ -56,6 +56,7 @@ These tools help streamline various DevOps processes, from code management and i
 15. **Services Management and Systemd**
 16. **SELinux commands**
 17. **Kernel Management**
+18. **Miscellaneous / Automate Scripts**
 
 ## 1: Linux File System
 Here's a brief overview of the Linux file system, some useful commands, and examples:
@@ -245,3 +246,508 @@ These commands are fundamental for navigating and managing the Linux file system
 
 
 ## Permissions and Ownership :
+
+### Linux Filesystem Permissions and Ownership
+
+In Linux, each file and directory has associated permissions and ownership that determine who can read, write, or execute the file. Understanding these concepts is crucial for managing system security and user access.
+
+#### Ownership
+Each file and directory has three types of ownership:
+1. **User (Owner)**: The user who owns the file.
+2. **Group**: A group of users who share access permissions.
+3. **Others**: All other users.
+
+#### Permissions
+Permissions are divided into three categories:
+1. **Read (r)**: Permission to read the contents of the file or directory.
+2. **Write (w)**: Permission to modify the file or directory.
+3. **Execute (x)**: Permission to execute the file or traverse the directory.
+
+Permissions are represented in a string of 10 characters, such as `-rwxr-xr--`. The first character indicates the file type (`-` for a regular file, `d` for a directory), and the remaining nine characters represent the permissions for the user, group, and others.
+
+#### Example
+Consider the following example:
+```bash
+-rwxr-xr--
+```
+- `-`: Regular file.
+- `rwx`: User (owner) has read, write, and execute permissions.
+- `r-x`: Group has read and execute permissions.
+- `r--`: Others have read-only permissions.
+
+#### Changing Permissions
+You can change permissions using the `chmod` command. For example:
+```bash
+chmod 755 file.txt
+```
+This sets the permissions to `rwxr-xr-x`, meaning the owner can read, write, and execute, while the group and others can only read and execute.
+
+#### Changing Ownership
+You can change ownership using the `chown` command. For example:
+```bash
+chown user:group file.txt
+```
+This changes the owner to `user` and the group to `group`.
+
+### Examples
+
+1. **Viewing Permissions**
+   ```bash
+   ls -l file.txt
+   ```
+   *Output*:
+   ```bash
+   -rw-r--r-- 1 user group 1234 Mar 18 12:34 file.txt
+   ```
+
+2. **Changing Permissions**
+   ```bash
+   chmod 644 file.txt
+   ```
+   *Explanation*: Sets permissions to `rw-r--r--`, meaning the owner can read and write, while the group and others can only read.
+
+3. **Changing Ownership**
+   ```bash
+   chown newuser:newgroup file.txt
+   ```
+   *Explanation*: Changes the owner to `newuser` and the group to `newgroup`.
+
+Understanding and managing permissions and ownership is essential for maintaining a secure and well-organized Linux system. 
+
+Great! Let's dive into some more advanced examples of Linux filesystem permissions and ownership.
+
+### Advanced Examples
+
+#### 1. **Setting Special Permissions**
+Special permissions include the setuid, setgid, and sticky bit. These permissions provide additional security and functionality.
+
+- **setuid (Set User ID)**: When set on an executable file, the file runs with the permissions of the file owner, not the user running the file.
+  ```bash
+  chmod u+s /path/to/executable
+  ```
+  *Example*: Sets the setuid bit on an executable file.
+  ```bash
+  -rwsr-xr-x 1 root root 12345 Mar 18 12:34 /path/to/executable
+  ```
+
+- **setgid (Set Group ID)**: When set on a directory, new files created within the directory inherit the group of the directory.
+  ```bash
+  chmod g+s /path/to/directory
+  ```
+  *Example*: Sets the setgid bit on a directory.
+  ```bash
+  drwxrwsr-x 2 user group 4096 Mar 18 12:34 /path/to/directory
+  ```
+
+- **Sticky Bit**: When set on a directory, only the file owner can delete or rename files within the directory.
+  ```bash
+  chmod +t /path/to/directory
+  ```
+  *Example*: Sets the sticky bit on a directory.
+  ```bash
+  drwxrwxrwt 2 user group 4096 Mar 18 12:34 /path/to/directory
+  ```
+
+#### 2. **Recursive Permission Changes**
+Changing permissions recursively affects all files and directories within a specified directory.
+
+- **Recursive Change of Permissions**
+  ```bash
+  chmod -R 755 /path/to/directory
+  ```
+  *Example*: Sets permissions to `rwxr-xr-x` for all files and directories within the specified directory.
+
+- **Recursive Change of Ownership**
+  ```bash
+  chown -R user:group /path/to/directory
+  ```
+  *Example*: Changes the owner to `user` and the group to `group` for all files and directories within the specified directory.
+
+#### 3. **Using `find` with Permissions**
+The `find` command can be used to locate files with specific permissions and perform actions on them.
+
+- **Finding Files with Specific Permissions**
+  ```bash
+  find /path/to/search -type f -perm 644
+  ```
+  *Example*: Finds all files with permissions `644` in the specified path.
+
+- **Changing Permissions of Found Files**
+  ```bash
+  find /path/to/search -type f -perm 644 -exec chmod 600 {} \;
+  ```
+  *Example*: Finds all files with permissions `644` and changes them to `600`.
+
+#### 4. **Access Control Lists (ACLs)**
+ACLs provide a more flexible permission mechanism for file systems.
+
+- **Setting an ACL**
+  ```bash
+  setfacl -m u:username:rwx /path/to/file
+  ```
+  *Example*: Grants `username` read, write, and execute permissions on the specified file.
+
+- **Viewing ACLs**
+  ```bash
+  getfacl /path/to/file
+  ```
+  *Example*: Displays the ACLs of the specified file.
+
+- **Removing an ACL**
+  ```bash
+  setfacl -x u:username /path/to/file
+  ```
+  *Example*: Removes the ACL entry for `username` on the specified file.
+
+These advanced examples provide greater control and flexibility in managing permissions and ownership in Linux.
+### Best Practices for Managing Permissions in Linux
+
+1. **Implement Least Privilege**: Grant users the minimum permissions necessary to perform their tasks. This reduces the risk of accidental or malicious changes.
+
+2. **Regular Audits**: Periodically review permissions to ensure they are still appropriate. Remove unnecessary permissions and accounts.
+
+3. **Use Groups**: Assign permissions to groups rather than individual users. This simplifies management and ensures consistency.
+
+4. **Avoid Shared Accounts**: Each user should have a unique account to ensure accountability and traceability.
+
+5. **Log and Monitor**: Keep logs of permission changes and monitor for suspicious activity. This helps in identifying and responding to security incidents.
+
+6. **Document Changes**: Maintain documentation of permission setups and changes. This is vital for troubleshooting and reviewing access controls.
+
+### Using ACLs Effectively in Linux
+
+Access Control Lists (ACLs) provide more granular control over file permissions than the standard user/group/other model. Here are some best practices for using ACLs effectively:
+
+1. **Understand Basic ACL Commands**:
+   - **View ACLs**: Use `getfacl` to view ACL entries.
+     ```bash
+     getfacl filename
+     ```
+   - **Set ACLs**: Use `setfacl` to set new ACL entries.
+     ```bash
+     setfacl -m u:username:rwx filename
+     ```
+   - **Default ACLs**: Use `setfacl -d` to set default ACLs on directories.
+     ```bash
+     setfacl -d -m u:username:rwx dirname
+     ```
+
+2. **Regular Audits**: Regularly review ACL settings to ensure they meet access needs and security requirements.
+
+3. **Document ACL Changes**: Record every ACL change. Documentation is crucial for troubleshooting and reviewing permission setups.
+
+4. **Use Default ACLs for Directories**: Set default ACLs on directories to ensure new files inherit the correct permissions automatically.
+
+5. **Avoid Overuse**: While ACLs offer detailed control, overuse can complicate management. Use them judiciously.
+
+6. **Combine with Standard Permissions**: Use ACLs in conjunction with standard permissions to maintain a balance between simplicity and control.
+
+### Example Commands
+
+- **Viewing ACLs**:
+  ```bash
+  getfacl /home/user/file.txt
+  ```
+
+- **Setting ACLs**:
+  ```bash
+  setfacl -m u:john:rwx /home/user/file.txt
+  ```
+
+- **Setting Default ACLs**:
+  ```bash
+  setfacl -d -m u:john:rwx /home/user/directory
+  ```
+
+These practices and commands help ensure secure and efficient management of permissions and ACLs in Linux.
+
+### Assignments / Practicals
+Sure! Here are some practical assignment questions based on Linux permissions and ownership:
+
+### Assignment Questions
+
+#### 1. Basic Permissions and Ownership
+1. **Create a file named `example.txt` in your home directory. Set the permissions to `rw-r--r--`.**
+   - Command:
+     ```bash
+     touch ~/example.txt
+     chmod 644 ~/example.txt
+     ```
+
+2. **Change the ownership of `example.txt` to another user (e.g., `john`).**
+   - Command:
+     ```bash
+     sudo chown john ~/example.txt
+     ```
+
+3. **Create a directory named `project` in your home directory. Set the permissions to `rwxr-xr-x`.**
+   - Command:
+     ```bash
+     mkdir ~/project
+     chmod 755 ~/project
+     ```
+
+#### 2. Advanced Permissions
+4. **Set the setuid bit on an executable file named `runme` in your home directory. Verify the permissions.**
+   - Command:
+     ```bash
+     chmod u+s ~/runme
+     ls -l ~/runme
+     ```
+
+5. **Set the setgid bit on the `project` directory. Verify the permissions.**
+   - Command:
+     ```bash
+     chmod g+s ~/project
+     ls -ld ~/project
+     ```
+
+6. **Set the sticky bit on the `project` directory. Verify the permissions.**
+   - Command:
+     ```bash
+     chmod +t ~/project
+     ls -ld ~/project
+     ```
+
+#### 3. Recursive Permission Changes
+7. **Create a directory structure `project/subdir1/subdir2` in your home directory. Set the permissions of all directories to `rwxr-xr-x` recursively.**
+   - Command:
+     ```bash
+     mkdir -p ~/project/subdir1/subdir2
+     chmod -R 755 ~/project
+     ```
+
+8. **Change the ownership of all files and directories within `project` to user `john` and group `developers` recursively.**
+   - Command:
+     ```bash
+     sudo chown -R john:developers ~/project
+     ```
+
+#### 4. Using ACLs
+9. **Set an ACL on `example.txt` to grant user `john` read and write permissions. Verify the ACL.**
+   - Command:
+     ```bash
+     setfacl -m u:john:rw ~/example.txt
+     getfacl ~/example.txt
+     ```
+
+10. **Set a default ACL on the `project` directory to grant user `john` read, write, and execute permissions on all new files and directories created within it. Verify the default ACL.**
+    - Command:
+      ```bash
+      setfacl -d -m u:john:rwx ~/project
+      getfacl ~/project
+      ```
+
+11. **Find all files in your home directory with permissions `644` and change them to `600`.**
+    - Command:
+      ```bash
+      find ~/ -type f -perm 644 -exec chmod 600 {} \;
+      ```
+
+### Additional Tasks
+12. **Create a script that automates the process of setting permissions and ownership for a new project directory. The script should:**
+    - Create a directory structure `project/src`, `project/bin`, and `project/logs`.
+    - Set the owner to `developer` and group to `devteam`.
+    - Set permissions to `rwxr-xr-x` for directories and `rw-r--r--` for files.
+    - Set default ACLs to grant user `john` full access to all new files and directories.
+
+    - Script:
+      ```bash
+      #!/bin/bash
+      mkdir -p ~/project/{src,bin,logs}
+      sudo chown -R developer:devteam ~/project
+      find ~/project -type d -exec chmod 755 {} \;
+      find ~/project -type f -exec chmod 644 {} \;
+      setfacl -d -m u:john:rwx ~/project
+      ```
+
+These assignments will help you practice and understand Linux permissions and ownership in a practical context.
+
+Here are the commands to remove the setuid, setgid, sticky bit, and ACLs, along with examples:
+
+### Removing Special Permissions
+
+#### 1. **Remove setuid**
+To remove the setuid bit from a file:
+```bash
+chmod u-s /path/to/executable
+```
+*Example*:
+```bash
+chmod u-s /home/user/runme
+```
+This command removes the setuid bit from the `runme` executable.
+
+#### 2. **Remove setgid**
+To remove the setgid bit from a directory:
+```bash
+chmod g-s /path/to/directory
+```
+*Example*:
+```bash
+chmod g-s /home/user/project
+```
+This command removes the setgid bit from the `project` directory.
+
+#### 3. **Remove sticky bit**
+To remove the sticky bit from a directory:
+```bash
+chmod -t /path/to/directory
+```
+*Example*:
+```bash
+chmod -t /home/user/project
+```
+This command removes the sticky bit from the `project` directory.
+
+### Removing ACLs
+
+#### 4. **Remove a specific ACL entry**
+To remove a specific ACL entry for a user:
+```bash
+setfacl -x u:username /path/to/file
+```
+*Example*:
+```bash
+setfacl -x u:john /home/user/example.txt
+```
+This command removes the ACL entry for user `john` from the `example.txt` file.
+
+#### 5. **Remove all ACL entries**
+To remove all ACL entries from a file:
+```bash
+setfacl -b /path/to/file
+```
+*Example*:
+```bash
+setfacl -b /home/user/example.txt
+```
+This command removes all ACL entries from the `example.txt` file.
+
+#### 6. **Remove default ACLs**
+To remove default ACLs from a directory:
+```bash
+setfacl -k /path/to/directory
+```
+*Example*:
+```bash
+setfacl -k /home/user/project
+```
+This command removes all default ACLs from the `project` directory.
+
+These commands will help you effectively manage and remove special permissions and ACLs in Linux.
+
+
+
+
+
+
+
+
+## 18. Miscellaneous / Automate Scripts:
+
+Setting expiry dates and times for permissions and ownerships directly in Linux is not natively supported by traditional file system commands. However, you can achieve this using a combination of cron jobs and shell scripts to automate the process. Here are some practical assignments and examples to help you understand how to set and remove permissions and ownerships based on time.
+
+### Assignment Questions
+
+#### 1. **Set Temporary Permissions Using a Script and Cron Job**
+1. **Create a script to set read, write, and execute permissions for a user on a file, and then remove these permissions after a specified time.**
+   - **Script**:
+     ```bash
+     #!/bin/bash
+     # Set permissions
+     chmod u+rwx /home/user/example.txt
+     # Schedule removal of permissions after 1 hour
+     echo "chmod u-rwx /home/user/example.txt" | at now + 1 hour
+     ```
+
+2. **Create a cron job to run the script at a specific time.**
+   - **Cron Job**:
+     ```bash
+     crontab -e
+     ```
+     Add the following line to the crontab file:
+     ```bash
+     0 12 * * * /home/user/set_permissions.sh
+     ```
+     This cron job runs the script at 12:00 PM every day.
+
+#### 2. **Set Temporary Ownership Using a Script and Cron Job**
+3. **Create a script to change the ownership of a file to a specific user and group, and then revert the ownership after a specified time.**
+   - **Script**:
+     ```bash
+     #!/bin/bash
+     # Change ownership
+     sudo chown john:developers /home/user/example.txt
+     # Schedule reversion of ownership after 2 hours
+     echo "sudo chown user:user /home/user/example.txt" | at now + 2 hours
+     ```
+
+4. **Create a cron job to run the script at a specific time.**
+   - **Cron Job**:
+     ```bash
+     crontab -e
+     ```
+     Add the following line to the crontab file:
+     ```bash
+     0 14 * * * /home/user/change_ownership.sh
+     ```
+     This cron job runs the script at 2:00 PM every day.
+
+### Examples
+
+#### Example 1: Temporary Permissions
+1. **Create the script `set_permissions.sh`**:
+   ```bash
+   nano /home/user/set_permissions.sh
+   ```
+   Add the following content:
+   ```bash
+   #!/bin/bash
+   chmod u+rwx /home/user/example.txt
+   echo "chmod u-rwx /home/user/example.txt" | at now + 1 hour
+   ```
+   Save and close the file.
+
+2. **Make the script executable**:
+   ```bash
+   chmod +x /home/user/set_permissions.sh
+   ```
+
+3. **Create the cron job**:
+   ```bash
+   crontab -e
+   ```
+   Add the following line:
+   ```bash
+   0 12 * * * /home/user/set_permissions.sh
+   ```
+
+#### Example 2: Temporary Ownership
+1. **Create the script `change_ownership.sh`**:
+   ```bash
+   nano /home/user/change_ownership.sh
+   ```
+   Add the following content:
+   ```bash
+   #!/bin/bash
+   sudo chown john:developers /home/user/example.txt
+   echo "sudo chown user:user /home/user/example.txt" | at now + 2 hours
+   ```
+   Save and close the file.
+
+2. **Make the script executable**:
+   ```bash
+   chmod +x /home/user/change_ownership.sh
+   ```
+
+3. **Create the cron job**:
+   ```bash
+   crontab -e
+   ```
+   Add the following line:
+   ```bash
+   0 14 * * * /home/user/change_ownership.sh
+   ```
+
+These assignments and examples demonstrate how to use scripts and cron jobs to manage temporary permissions and ownerships in Linux.
