@@ -2472,8 +2472,444 @@ The `nmcli` command is used to manage NetworkManager.
 These assignments will help you practice and understand networking in Linux, from basic to advanced levels. 
 
 ## 9. **Disk and Storage Management**
-10. **System Monitoring and Performance**
-11. **Shell Scripting**
+Sure! Let's explore disk and storage management in Linux, starting from basic to advanced levels. We'll cover various commands and tools, along with detailed explanations and examples. Finally, I'll provide some assignment questions to help you practice.
+
+### Basic Disk and Storage Management Commands
+
+#### 1. **`df` (Disk Free)**
+Displays the amount of disk space used and available on mounted filesystems.
+- **Command**:
+  ```bash
+  df -h
+  ```
+- **Example**:
+  ```bash
+  df -h
+  ```
+  *Explanation*: This command shows disk space usage in a human-readable format (e.g., GB, MB).
+
+#### 2. **`du` (Disk Usage)**
+Estimates file space usage.
+- **Command**:
+  ```bash
+  du -sh directory_name
+  ```
+- **Example**:
+  ```bash
+  du -sh /var/log
+  ```
+  *Explanation*: This command shows the total disk space used by the `/var/log` directory in a human-readable format.
+
+#### 3. **`lsblk` (List Block Devices)**
+Lists information about block devices.
+- **Command**:
+  ```bash
+  lsblk
+  ```
+- **Example**:
+  ```bash
+  lsblk
+  ```
+  *Explanation*: This command displays a detailed tree view of storage devices, partitions, and mount points.
+
+#### 4. **`fdisk` (Format Disk)**
+A partition table manipulator for creating and managing disk partitions.
+- **Command**:
+  ```bash
+  sudo fdisk /dev/sda
+  ```
+- **Example**:
+  ```bash
+  sudo fdisk /dev/sda
+  ```
+  *Explanation*: This command opens an interactive session to manage partitions on `/dev/sda`.
+
+#### 5. **`mkfs` (Make Filesystem)**
+Creates a filesystem on a partition.
+- **Command**:
+  ```bash
+  sudo mkfs -t ext4 /dev/sda1
+  ```
+- **Example**:
+  ```bash
+  sudo mkfs -t ext4 /dev/sda1
+  ```
+  *Explanation*: This command formats the partition `/dev/sda1` as `ext4`.
+
+### Intermediate Disk and Storage Management Commands
+
+#### 6. **`mount`**
+Mounts filesystems to specified directories.
+- **Command**:
+  ```bash
+  sudo mount /dev/sda1 /mnt
+  ```
+- **Example**:
+  ```bash
+  sudo mount /dev/sda1 /mnt
+  ```
+  *Explanation*: This command mounts the partition `/dev/sda1` to the `/mnt` directory.
+
+#### 7. **`umount`**
+Unmounts filesystems.
+- **Command**:
+  ```bash
+  sudo umount /mnt
+  ```
+- **Example**:
+  ```bash
+  sudo umount /mnt
+  ```
+  *Explanation*: This command unmounts the filesystem mounted at `/mnt`.
+
+#### 8. **`blkid`**
+Displays block device attributes, such as UUIDs and filesystem types.
+- **Command**:
+  ```bash
+  blkid /dev/sda1
+  ```
+- **Example**:
+  ```bash
+  blkid /dev/sda1
+  ```
+  *Explanation*: This command shows the UUID and filesystem type of `/dev/sda1`.
+
+#### 9. **`parted`**
+A disk partitioning tool used to create, resize, and manage disk partitions.
+- **Command**:
+  ```bash
+  sudo parted /dev/sda
+  ```
+- **Example**:
+  ```bash
+  sudo parted /dev/sda
+  ```
+  *Explanation*: This command opens an interactive session to manage partitions on `/dev/sda`.
+
+#### 10. **`tune2fs`**
+Adjusts tunable filesystem parameters on ext2/ext3/ext4 filesystems.
+- **Command**:
+  ```bash
+  sudo tune2fs -l /dev/sda1
+  ```
+- **Example**:
+  ```bash
+  sudo tune2fs -l /dev/sda1
+  ```
+  *Explanation*: This command lists the tunable parameters of the filesystem on `/dev/sda1`.
+
+### Advanced Disk and Storage Management Commands
+
+#### 11. **`lvcreate`**
+Creates a logical volume in LVM (Logical Volume Manager).
+- **Command**:
+  ```bash
+  sudo lvcreate -L 10G -n lvname vgname
+  ```
+- **Example**:
+  ```bash
+  sudo lvcreate -L 10G -n mylv myvg
+  ```
+  *Explanation*: This command creates a 10GB logical volume named `mylv` in the volume group `myvg`.
+
+#### 12. **`vgcreate`**
+Creates a volume group in LVM.
+- **Command**:
+  ```bash
+  sudo vgcreate vgname /dev/sda1
+  ```
+- **Example**:
+  ```bash
+  sudo vgcreate myvg /dev/sda1
+  ```
+  *Explanation*: This command creates a volume group named `myvg` using the partition `/dev/sda1`.
+
+#### 13. **`pvcreate`**
+Initializes a physical volume for use by LVM.
+- **Command**:
+  ```bash
+  sudo pvcreate /dev/sda1
+  ```
+- **Example**:
+  ```bash
+  sudo pvcreate /dev/sda1
+  ```
+  *Explanation*: This command initializes the partition `/dev/sda1` as a physical volume.
+
+#### 14. **`fsck`**
+Checks and repairs filesystem integrity.
+- **Command**:
+  ```bash
+  sudo fsck /dev/sda1
+  ```
+- **Example**:
+  ```bash
+  sudo fsck /dev/sda1
+  ```
+  *Explanation*: This command checks and repairs the filesystem on `/dev/sda1`.
+
+#### 15. **`findmnt`**
+Lists mounted filesystems.
+- **Command**:
+  ```bash
+  findmnt
+  ```
+- **Example**:
+  ```bash
+  findmnt
+  ```
+  *Explanation*: This command displays a list of all mounted filesystems.
+
+### Examples and Use Cases
+
+#### Example 1: Viewing Disk Space Usage
+- **Command**:
+  ```bash
+  df -h
+  ```
+  *Explanation*: Displays disk space usage in a human-readable format.
+
+#### Example 2: Estimating Directory Space Usage
+- **Command**:
+  ```bash
+  du -sh /var/log
+  ```
+  *Explanation*: Shows the total disk space used by the `/var/log` directory.
+
+#### Example 3: Listing Block Devices
+- **Command**:
+  ```bash
+  lsblk
+  ```
+  *Explanation*: Displays a detailed tree view of storage devices, partitions, and mount points.
+
+#### Example 4: Creating a Partition
+- **Command**:
+  ```bash
+  sudo fdisk /dev/sda
+  ```
+  *Explanation*: Opens an interactive session to manage partitions on `/dev/sda`.
+
+#### Example 5: Creating a Filesystem
+- **Command**:
+  ```bash
+  sudo mkfs -t ext4 /dev/sda1
+  ```
+  *Explanation*: Formats the partition `/dev/sda1` as `ext4`.
+
+#### Example 6: Mounting a Filesystem
+- **Command**:
+  ```bash
+  sudo mount /dev/sda1 /mnt
+  ```
+  *Explanation*: Mounts the partition `/dev/sda1` to the `/mnt` directory.
+
+#### Example 7: Creating a Logical Volume
+- **Command**:
+  ```bash
+  sudo lvcreate -L 10G -n mylv myvg
+  ```
+  *Explanation*: Creates a 10GB logical volume named `mylv` in the volume group `myvg`.
+
+### Assignment Questions
+
+#### Basic Level Assignments
+1. **Display the amount of disk space used and available on mounted filesystems using the `df` command.**
+   - Command:
+     ```bash
+     df -h
+     ```
+
+2. **Estimate the disk space usage of the `/home` directory using the `du` command.**
+   - Command:
+     ```bash
+     du -sh /home
+     ```
+
+3. **List all block devices and their partitions using the `lsblk` command.**
+   - Command:
+     ```bash
+     lsblk
+     ```
+
+#### Intermediate Level Assignments
+4. **Create a new partition on `/dev/sdb` using the `fdisk` command.**
+   - Command:
+     ```bash
+     sudo fdisk /dev/sdb
+     ```
+
+5. **Format the partition `/dev/sdb1` as `ext4` using the `mkfs` command.**
+   - Command:
+     ```bash
+     sudo mkfs -t ext4 /dev/sdb1
+     ```
+
+6. **Mount the partition `/dev/sdb1` to the `/mnt` directory using the `mount` command.**
+   - Command:
+     ```bash
+     sudo mount /dev/sdb1 /mnt
+     ```
+
+#### Advanced Level Assignments
+7. **Initialize the partition `/dev/sdb1` as a physical volume using the `pvcreate` command.**
+   - Command:
+     ```bash
+     sudo pvcreate /dev/sdb1
+     ```
+
+8. **Create a volume group named `datavg` using the partition `/dev/sdb1` with the `vgcreate` command.**
+   - Command:
+     ```bash
+     sudo vgcreate datavg /dev/sdb1
+     ```
+
+Logical volumes, volume groups, and physical volumes are components of the Logical Volume Manager (LVM) in Linux. They are created to provide flexible and efficient disk management. Here's when and why you might create each of them:
+
+### Physical Volumes (PV)
+**When to Create**: 
+- When you have a new disk or partition that you want to use with LVM.
+- When you need to initialize a storage device for use in LVM.
+
+**Why to Create**:
+- Physical volumes are the building blocks of LVM. They represent the actual storage devices (e.g., disks, partitions).
+- They allow you to aggregate multiple physical storage devices into a single logical storage pool.
+
+**Command**:
+```bash
+sudo pvcreate /dev/sda1
+```
+*Example*: Initializes the partition `/dev/sda1` as a physical volume.
+
+### Volume Groups (VG)
+**When to Create**:
+- After creating physical volumes, you create a volume group to combine them.
+- When you need to manage multiple physical volumes as a single entity.
+
+**Why to Create**:
+- Volume groups allow you to pool physical volumes together, providing a larger and more flexible storage space.
+- They enable you to allocate space dynamically to logical volumes.
+
+**Command**:
+```bash
+sudo vgcreate vgname /dev/sda1 /dev/sdb1
+```
+*Example*: Creates a volume group named `vgname` using the partitions `/dev/sda1` and `/dev/sdb1`.
+
+### Logical Volumes (LV)
+**When to Create**:
+- After creating a volume group, you create logical volumes to allocate storage space for filesystems.
+- When you need to create partitions within a volume group for specific purposes (e.g., root filesystem, home directory).
+
+**Why to Create**:
+- Logical volumes provide flexible and resizable storage partitions within a volume group.
+- They allow you to manage storage space more efficiently, including resizing and snapshot capabilities.
+
+**Command**:
+```bash
+sudo lvcreate -L 10G -n lvname vgname
+```
+*Example*: Creates a 10GB logical volume named `lvname` in the volume group `vgname`.
+
+### Example Workflow
+
+1. **Create Physical Volumes**:
+   ```bash
+   sudo pvcreate /dev/sda1 /dev/sdb1
+   ```
+
+2. **Create a Volume Group**:
+   ```bash
+   sudo vgcreate myvg /dev/sda1 /dev/sdb1
+   ```
+
+3. **Create Logical Volumes**:
+   ```bash
+   sudo lvcreate -L 10G -n mylv myvg
+   ```
+
+These steps and commands help you understand when and why to create physical volumes, volume groups, and logical volumes in Linux.
+
+## 10. **System Monitoring and Performance**
+Sure! Let's dive into system monitoring and performance management in Linux. I'll cover some essential commands, explain examples from basic to advanced levels, and provide assignment questions at the end.
+
+### Basic Commands
+
+1. **`top`**: Displays real-time system summary, including CPU usage, memory usage, and running processes.
+   ```bash
+   top
+   ```
+   - **Example**: Run `top` and observe the CPU and memory usage of processes. Press `q` to exit.
+
+2. **`htop`**: An improved version of `top` with a more user-friendly interface.
+   ```bash
+   htop
+   ```
+   - **Example**: Run `htop` to get a detailed view of system performance. Use arrow keys to navigate and `F10` to exit.
+
+3. **`vmstat`**: Reports virtual memory statistics.
+   ```bash
+   vmstat 5
+   ```
+   - **Example**: Run `vmstat 5` to get updates every 5 seconds on memory, CPU, and I/O statistics.
+
+### Intermediate Commands
+
+4. **`iostat`**: Provides CPU and I/O statistics.
+   ```bash
+   iostat -x 5
+   ```
+   - **Example**: Run `iostat -x 5` to get extended statistics every 5 seconds.
+
+5. **`netstat`**: Displays network connections, routing tables, interface statistics, masquerade connections, and multicast memberships.
+   ```bash
+   netstat -tuln
+   ```
+   - **Example**: Run `netstat -tuln` to list all listening ports.
+
+6. **`sar`**: Collects, reports, and saves system activity information.
+   ```bash
+   sar -u 5
+   ```
+   - **Example**: Run `sar -u 5` to get CPU usage statistics every 5 seconds.
+
+### Advanced Commands
+
+7. **`perf`**: A powerful performance monitoring tool.
+   ```bash
+   perf stat -a sleep 5
+   ```
+   - **Example**: Run `perf stat -a sleep 5` to collect performance statistics for 5 seconds.
+
+8. **`strace`**: Traces system calls and signals.
+   ```bash
+   strace -c ls
+   ```
+   - **Example**: Run `strace -c ls` to trace the `ls` command and summarize system calls.
+
+9. **`dstat`**: Combines the functionality of `vmstat`, `iostat`, `netstat`, and others.
+   ```bash
+   dstat -cdngy 5
+   ```
+   - **Example**: Run `dstat -cdngy 5` to get detailed statistics on CPU, disk, network, and system every 5 seconds.
+
+### Assignment Questions
+
+1. **Basic Level**:
+   - Run the `top` command and identify the process consuming the most CPU.
+   - Use `htop` to find the process with the highest memory usage.
+
+2. **Intermediate Level**:
+   - Use `iostat` to monitor disk I/O and identify any bottlenecks.
+   - Run `netstat` and list all active network connections.
+
+3. **Advanced Level**:
+   - Use `perf` to analyze the performance of a specific application.
+   - Trace the system calls of a command using `strace` and summarize the results.
+
+
+## 11. **Shell Scripting**
+
 12. **Version Controlling with Git**
 13. **Backup and Recovery**
 14. **System Boot and Initialization**
