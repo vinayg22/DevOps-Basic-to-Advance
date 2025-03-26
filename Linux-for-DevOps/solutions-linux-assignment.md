@@ -47,7 +47,8 @@ sudo chown user1 /dir1 /dir7/dir10/ /f2
 
 
 # 2 Login as user1 and perform below
-Create users and set passwords – user4, user5
+## 2.1 Create users and set passwords – user4, user5
+
 Create Groups – app, database
 Login as ‘user4’ and perform below
 Create directory – /dir6/dir4
