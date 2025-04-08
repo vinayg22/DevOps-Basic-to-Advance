@@ -196,14 +196,29 @@ Delete /dir7
 Delete /f1 & /f4
 Delete /opt/dir14
 ```bash
-
-``
-Logins as ‘root’ user and perform below
+sudo usermod -aG sudo user5
+su user5
+rm -r /dir1 /dir2 /dir3 /dir5 /dir7
+rm -r /f1 /f4
+rm -r /opt/dir14
+```
+## 9 Logins as ‘root’ user and perform below
 Delete users – ‘user1, user2, user3, user4, user5’
 Delete groups – app, aws, database, devops
 Delete home directories of all users ‘user1, user2, user3, user4, user5’ if any exists still.
 Unmount /data file system
 Delete /data directory
 Login to AWS and detach EBS volume to the EC2 Instance and delete the volume and then terminate EC2 instance.
+```bash
+sudo su -
+userdel user1 user2 user3 user4 user5
+groupdel app aws database devops
+rm -r /home/user1 /home/user2 /home/user3 /home/user4 /home/user5
+unmount /data
+rm -r /data
+```
+
+Login to AWS, go to volumes, checkbox the 5GB EBS volume.
+go to actions -> dettach volume
 
 
